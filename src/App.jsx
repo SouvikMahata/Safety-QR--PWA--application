@@ -1,12 +1,3 @@
-import React from 'react'
-import AllRoutes from './routes/AllRoutes'
-
-function App() {
-  return (
-    <div>
-      <AllRoutes />
-    </div>
-  )
-}
-
-export default App
+// src/App.jsx
+// RouterProvider is handled in main.jsx — this file kept for potential future wrapping
+export default null;
