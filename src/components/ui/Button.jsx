@@ -23,14 +23,14 @@ const Spinner = () => (
 const Button = ({
   children,
   variant = 'primary',
-  size    = 'md',
+  size = 'md',
   loading = false,
   fullWidth = false,
   className = '',
   onClick,
   type = 'button',
   disabled,
-  ../.rest
+  ...rest
 }) => (
   <motion.button
     type={type}
@@ -46,7 +46,7 @@ const Button = ({
       fullWidth ? 'w-full' : '',
       className,
     ].join(' ')}
-    {../.rest}
+    {...rest}
   >
     {loading ? <Spinner /> : children}
   </motion.button>

@@ -1,18 +1,21 @@
-// src/main.jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
 
-import ErrorBoundary from './components/common/ErrorBoundary';
-import './index.css';
+import App from "./App";
+import ErrorBoundary from "./components/common/ErrorBoundary";
+import "./index.css";
 
-// Register PWA service worker
-import { registerSW } from 'virtual:pwa-register';
-import App from './App';
-registerSW({ onNeedRefresh() { }, onOfflineReady() { } });
+import { registerSW } from "virtual:pwa-register";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+registerSW({
+  onNeedRefresh() { },
+  onOfflineReady() { }
+});
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </React.StrictMode>
 );

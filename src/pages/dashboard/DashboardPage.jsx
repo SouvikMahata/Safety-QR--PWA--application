@@ -1,17 +1,17 @@
 // src/pages/dashboard/DashboardPage.jsx
+import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 
-import { useAuth } from '../hooks/useAuth';
-import { useProfile } from '../hooks/useProfile';
-import { useCards } from '../hooks/useCards';
-import { ROUTES } from '../utils/constants';
-import { getInitials } from '../utils/formatters';
+import { useAuth } from '../../hooks/useAuth';
+import { useCards } from '../../hooks/useCards';
+import { useProfile } from '../../hooks/useProfile';
+import { ROUTES } from '../../utils/constants';
+import { getInitials } from '../../utils/formatters';
 
-import Card from '../components/ui/Card';
-import Badge from '../components/ui/Badge';
-import EmptyState from '../components/common/EmptyState';
+import EmptyState from '../../components/common/EmptyState';
+import Badge from '../../components/ui/Badge';
+import Card from '../../components/ui/Card';
 
 const StatCard = ({ icon, label, value, onClick }) => (
   <Card onClick={onClick} className="flex-1 text-center">

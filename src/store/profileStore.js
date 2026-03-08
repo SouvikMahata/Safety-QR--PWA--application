@@ -50,7 +50,7 @@ const useProfileStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await profileApi.createStudent(data);
-      set((s) => ({ loading: false, students: [../.s.students, res.data] }));
+      set((s) => ({ loading: false, students: [...s.students, res.data] }));
       return { success: true, student: res.data };
     } catch (err) {
       set({ loading: false, error: err.message });
@@ -78,7 +78,7 @@ const useProfileStore = create((set, get) => ({
       const res = await profileApi.uploadStudentPhoto(studentId, formData);
       set((s) => ({
         students: s.students.map((st) =>
-          st.id === studentId ? { ../.st, photo_url: res.data.photo_url } : st,
+          st.id === studentId ? { ...st, photo_url: res.data.photo_url } : st,
         ),
       }));
       return { success: true, photo_url: res.data.photo_url };

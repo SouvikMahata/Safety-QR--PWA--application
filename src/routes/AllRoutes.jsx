@@ -1,14 +1,11 @@
-// src/routes/index.jsx
 import { lazy, Suspense } from "react";
-import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
-import { ROUTES } from "../utils/constants";
-import useAuthStore from "../store/authStore";
+import { createBrowserRouter } from "react-router-dom";
 
 import AppLayout from "../_layouts/AppLayout";
 import AuthLayout from "../_layouts/AuthLayout";
 import PageLoader from "../components/common/PageLoader";
 
-// ── Lazy pages ─────────────────────────────────────
+// Lazy pages
 const LoginPage = lazy(() => import("../pages/auth/LoginPage"));
 const OtpPage = lazy(() => import("../pages/auth/OtpPage"));
 const RegisterPage = lazy(() => import("../pages/auth/RegisterPage"));
@@ -23,31 +20,14 @@ const CardDetail = lazy(() => import("../pages/card/CardDetailPage"));
 const QrLandingPage = lazy(() => import("../pages/QrLandingPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage"));
 
-// ── Route guards ───────────────────────────────────
-const RequireAuth = () => {
-    const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-    return isAuthenticated ? <Outlet /> : <Navigate to={ROUTES.LOGIN} replace />;
-};
-
-const RequireGuest = () => {
-    const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-    return !isAuthenticated ? (
-        <Outlet />
-    ) : (
-        <Navigate to={ROUTES.DASHBOARD} replace />
-    );
-};
-
-// ── Suspense wrapper ───────────────────────────────
+// Suspense wrapper
 const S = ({ children }) => (
     <Suspense fallback={<PageLoader />}>{children}</Suspense>
 );
 
-// ── Router ─────────────────────────────────────────
 export const AllRoutes = createBrowserRouter([
-    // Public — emergency QR scan (no auth)
     {
-        path: ROUTES.QR_LANDING,
+        path: "/qr/:id",
         element: (
             <S>
                 <QrLandingPage />
@@ -55,123 +35,118 @@ export const AllRoutes = createBrowserRouter([
         ),
     },
 
-    // Guest-only auth routes
     {
-        element: <RequireGuest />,
+        element: <AuthLayout />,
         children: [
             {
-                element: <AuthLayout />,
-                children: [
-                    {
-                        path: ROUTES.LOGIN,
-                        element: (
-                            <S>
-                                <LoginPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.OTP,
-                        element: (
-                            <S>
-                                <OtpPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.REGISTER,
-                        element: (
-                            <S>
-                                <RegisterPage />
-                            </S>
-                        ),
-                    },
-                ],
+                path: "/login",
+                element: (
+                    <S>
+                        <LoginPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/otp",
+                element: (
+                    <S>
+                        <OtpPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/register",
+                element: (
+                    <S>
+                        <RegisterPage />
+                    </S>
+                ),
             },
         ],
     },
 
-    // Protected app routes
     {
-        element: <RequireAuth />,
+        element: <AppLayout />,
         children: [
             {
-                element: <AppLayout />,
-                children: [
-                    { index: true, element: <Navigate to={ROUTES.DASHBOARD} replace /> },
-                    {
-                        path: ROUTES.DASHBOARD,
-                        element: (
-                            <S>
-                                <DashboardPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.PROFILE,
-                        element: (
-                            <S>
-                                <ProfilePage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.PROFILE_EDIT,
-                        element: (
-                            <S>
-                                <ProfileEditPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.STUDENTS,
-                        element: (
-                            <S>
-                                <StudentsPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.STUDENT_NEW,
-                        element: (
-                            <S>
-                                <StudentEdit />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.STUDENT_DETAIL,
-                        element: (
-                            <S>
-                                <StudentDetail />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.STUDENT_EDIT,
-                        element: (
-                            <S>
-                                <StudentEdit />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.CARDS,
-                        element: (
-                            <S>
-                                <CardsPage />
-                            </S>
-                        ),
-                    },
-                    {
-                        path: ROUTES.CARD_DETAIL,
-                        element: (
-                            <S>
-                                <CardDetail />
-                            </S>
-                        ),
-                    },
-                ],
+                path: "/",
+                element: (
+                    <S>
+                        <DashboardPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/dashboard",
+                element: (
+                    <S>
+                        <DashboardPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/profile",
+                element: (
+                    <S>
+                        <ProfilePage />
+                    </S>
+                ),
+            },
+            {
+                path: "/profile/edit",
+                element: (
+                    <S>
+                        <ProfileEditPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/students",
+                element: (
+                    <S>
+                        <StudentsPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/students/new",
+                element: (
+                    <S>
+                        <StudentEdit />
+                    </S>
+                ),
+            },
+            {
+                path: "/students/:id",
+                element: (
+                    <S>
+                        <StudentDetail />
+                    </S>
+                ),
+            },
+            {
+                path: "/students/:id/edit",
+                element: (
+                    <S>
+                        <StudentEdit />
+                    </S>
+                ),
+            },
+            {
+                path: "/cards",
+                element: (
+                    <S>
+                        <CardsPage />
+                    </S>
+                ),
+            },
+            {
+                path: "/cards/:id",
+                element: (
+                    <S>
+                        <CardDetail />
+                    </S>
+                ),
             },
         ],
     },

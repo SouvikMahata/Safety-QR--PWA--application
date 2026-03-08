@@ -1,7 +1,6 @@
 // src/_layouts/AppLayout.jsx
-import { Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import BottomNav from '../components/common/BottomNav';
 import OfflineBanner from '../components/common/OfflineBanner';
 import ConfirmDialog from '../components/ui/ConfirmDialog';

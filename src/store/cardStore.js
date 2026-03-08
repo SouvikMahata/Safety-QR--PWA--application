@@ -27,7 +27,7 @@ const useCardStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await cardApi.linkCard(payload);
-      set((s) => ({ loading: false, cards: [../.s.cards, res.data] }));
+      set((s) => ({ loading: false, cards: [...s.cards, res.data] }));
       return { success: true, card: res.data };
     } catch (err) {
       set({ loading: false, error: err.message });
@@ -37,17 +37,17 @@ const useCardStore = create((set, get) => ({
 
   // ── Status ─────────────────────────────────────────
   setCardStatus: async (cardId, status) => {
-    set((s) => ({ actionLoading: { ../.s.actionLoading, [cardId]: true } }));
+    set((s) => ({ actionLoading: { ...s.actionLoading, [cardId]: true } }));
     try {
       const res = await cardApi.setCardStatus(cardId, status);
       set((s) => ({
         cards: s.cards.map((c) => (c.id === cardId ? res.data : c)),
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
       }));
       return { success: true };
     } catch (err) {
       set((s) => ({
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
         error: err.message,
       }));
       return { success: false, error: err.message };
@@ -56,17 +56,17 @@ const useCardStore = create((set, get) => ({
 
   // ── Block ──────────────────────────────────────────
   setCardBlocked: async (cardId, blocked) => {
-    set((s) => ({ actionLoading: { ../.s.actionLoading, [cardId]: true } }));
+    set((s) => ({ actionLoading: { ...s.actionLoading, [cardId]: true } }));
     try {
       const res = await cardApi.setCardBlocked(cardId, blocked);
       set((s) => ({
         cards: s.cards.map((c) => (c.id === cardId ? res.data : c)),
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
       }));
       return { success: true };
     } catch (err) {
       set((s) => ({
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
         error: err.message,
       }));
       return { success: false, error: err.message };
@@ -75,17 +75,17 @@ const useCardStore = create((set, get) => ({
 
   // ── Unlink ─────────────────────────────────────────
   unlinkCard: async (cardId) => {
-    set((s) => ({ actionLoading: { ../.s.actionLoading, [cardId]: true } }));
+    set((s) => ({ actionLoading: { ...s.actionLoading, [cardId]: true } }));
     try {
       await cardApi.unlinkCard(cardId);
       set((s) => ({
         cards: s.cards.filter((c) => c.id !== cardId),
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
       }));
       return { success: true };
     } catch (err) {
       set((s) => ({
-        actionLoading: { ../.s.actionLoading, [cardId]: false },
+        actionLoading: { ...s.actionLoading, [cardId]: false },
         error: err.message,
       }));
       return { success: false, error: err.message };

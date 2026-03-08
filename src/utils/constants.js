@@ -18,3 +18,5 @@ export const C = {
   warning: "#f59e0b",
   info: "#3b82f6",
 };
+
+export const ROUTES = {};

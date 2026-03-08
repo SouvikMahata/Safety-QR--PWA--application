@@ -22,7 +22,7 @@ const useUIStore = create(
 
       // ── Confirm dialog ────────────────────────────
       confirm: { open: false, title: "", message: "", onConfirm: null },
-      openConfirm: (opts) => set({ confirm: { open: true, ../.opts } }),
+      openConfirm: (opts) => set({ confirm: { open: true, ...opts } }),
       closeConfirm: () =>
         set({
           confirm: { open: false, title: "", message: "", onConfirm: null },

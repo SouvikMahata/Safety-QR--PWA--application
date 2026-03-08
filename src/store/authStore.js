@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import { authApi } from "../api/authApi";
 import { tokenService } from "../services/tokenService";
-import { toE164 } from "../utils/formatters";
+// import { toE164 } from "./../utils/formatters";
 
 const useAuthStore = create(
   persist(
