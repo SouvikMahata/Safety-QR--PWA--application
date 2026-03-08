@@ -1,9 +1,10 @@
 import React from 'react'
+import AllRoutes from './routes/AllRoutes'
 
 function App() {
   return (
     <div>
-      <App />
+      <AllRoutes />
     </div>
   )
 }
