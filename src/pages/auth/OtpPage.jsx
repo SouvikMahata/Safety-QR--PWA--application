@@ -2,14 +2,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth }     from '@hooks/useAuth';
-import { useOtpTimer } from '@hooks/useOtpTimer';
-import { ROUTES }      from '@utils/constants';
-import { maskMobile }  from '@utils/formatters';
-import { notificationService } from '@services/notificationService';
+import { useAuth } from '../hooks/useAuth';
+import { useOtpTimer } from '../hooks/useOtpTimer';
+import { ROUTES } from '../utils/constants';
+import { maskMobile } from '../utils/formatters';
+import { notificationService } from '../services/notificationService';
 
-import OtpInput from '@components/forms/OtpInput';
-import Button   from '@components/ui/Button';
+import OtpInput from '../components/forms/OtpInput';
+import Button from '../components/ui/Button';
 
 const OtpPage = () => {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ const OtpPage = () => {
     const result = await verifyOtp(otp);
     if (result.success) {
       if (result.isNewUser) navigate(ROUTES.REGISTER, { replace: true });
-      else                  navigate(ROUTES.DASHBOARD, { replace: true });
+      else navigate(ROUTES.DASHBOARD, { replace: true });
     } else {
       setOtpError(result.error || 'Invalid OTP, please try again');
     }

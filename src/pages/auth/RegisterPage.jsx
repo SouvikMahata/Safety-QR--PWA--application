@@ -1,15 +1,15 @@
 // src/pages/auth/RegisterPage.jsx
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '../hookform/resolvers/zod';
 
-import { registrationSchema } from '@validations/schemas';
-import { useAuth } from '@hooks/useAuth';
-import { ROUTES } from '@utils/constants';
-import { notificationService } from '@services/notificationService';
+import { registrationSchema } from '../validations/schemas';
+import { useAuth } from '../hooks/useAuth';
+import { ROUTES } from '../utils/constants';
+import { notificationService } from '../services/notificationService';
 
-import Input from '@components/ui/Input';
-import Button from '@components/ui/Button';
+import Input from '../components/ui/Input';
+import Button from '../components/ui/Button';
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -63,7 +63,7 @@ const RegisterPage = () => {
                     autoCapitalize="characters"
                     error={errors.card_number?.message}
                     required
-                    {...register('card_number')}
+                    {../.register('card_number')}
                 />
 
                 <Input
@@ -72,7 +72,7 @@ const RegisterPage = () => {
                     placeholder="6–12 character code"
                     error={errors.nonce?.message}
                     required
-                    {...register('nonce')}
+                    {../.register('nonce')}
                 />
 
                 <Button type="submit" loading={loading} fullWidth size="lg">

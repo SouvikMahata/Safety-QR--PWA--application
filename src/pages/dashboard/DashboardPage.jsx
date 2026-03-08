@@ -3,15 +3,15 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { useAuth }    from '@hooks/useAuth';
-import { useProfile } from '@hooks/useProfile';
-import { useCards }   from '@hooks/useCards';
-import { ROUTES }     from '@utils/constants';
-import { getInitials } from '@utils/formatters';
+import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
+import { useCards } from '../hooks/useCards';
+import { ROUTES } from '../utils/constants';
+import { getInitials } from '../utils/formatters';
 
-import Card       from '@components/ui/Card';
-import Badge      from '@components/ui/Badge';
-import EmptyState from '@components/common/EmptyState';
+import Card from '../components/ui/Card';
+import Badge from '../components/ui/Badge';
+import EmptyState from '../components/common/EmptyState';
 
 const StatCard = ({ icon, label, value, onClick }) => (
   <Card onClick={onClick} className="flex-1 text-center">
@@ -32,7 +32,7 @@ const DashboardPage = () => {
     fetchCards();
   }, []);
 
-  const active  = cards.filter((c) => c.status === 'active' && !c.blocked).length;
+  const active = cards.filter((c) => c.status === 'active' && !c.blocked).length;
   const blocked = cards.filter((c) => c.blocked).length;
 
   return (
@@ -53,8 +53,8 @@ const DashboardPage = () => {
       {/* Stats */}
       <div className="px-4 flex gap-3 mb-6">
         <StatCard icon="🎒" label="Students" value={students.length} onClick={() => navigate(ROUTES.STUDENTS)} />
-        <StatCard icon="💳" label="Cards"    value={cards.length}    onClick={() => navigate(ROUTES.CARDS)} />
-        <StatCard icon="✅" label="Active"   value={active} />
+        <StatCard icon="💳" label="Cards" value={cards.length} onClick={() => navigate(ROUTES.CARDS)} />
+        <StatCard icon="✅" label="Active" value={active} />
       </div>
 
       {/* Alerts */}

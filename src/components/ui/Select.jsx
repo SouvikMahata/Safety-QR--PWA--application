@@ -4,11 +4,11 @@ import { forwardRef } from 'react';
 const Select = forwardRef(({
   label,
   error,
-  options = [],   // [{ value, label }] or ['string']
+  options =[],   // [{ value, label }] or ['string']
   placeholder = 'Select…',
   className = '',
   required,
-  ...rest
+  ../.rest
 }, ref) => {
   const normalised = options.map((o) =>
     typeof o === 'string' ? { value: o, label: o } : o,
@@ -29,7 +29,7 @@ const Select = forwardRef(({
         <select
           ref={ref}
           className="flex-1 bg-transparent text-slate-100 text-sm outline-none appearance-none"
-          {...rest}
+          {../.rest}
         >
           <option value="" disabled className="bg-slate-800">{placeholder}</option>
           {normalised.map((o) => (

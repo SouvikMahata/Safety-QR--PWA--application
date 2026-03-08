@@ -1,13 +1,13 @@
 // src/components/common/BottomNav.jsx
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ROUTES } from '@utils/constants';
+import { ROUTES } from '../../utils/constants';
 
 const NAV_ITEMS = [
-  { to: ROUTES.DASHBOARD, label: 'Home',     icon: '🏠' },
-  { to: ROUTES.STUDENTS,  label: 'Students', icon: '🎒' },
-  { to: ROUTES.CARDS,     label: 'Cards',    icon: '💳' },
-  { to: ROUTES.PROFILE,   label: 'Profile',  icon: '👤' },
+  { to: ROUTES.DASHBOARD, label: 'Home', icon: '🏠' },
+  { to: ROUTES.STUDENTS, label: 'Students', icon: '🎒' },
+  { to: ROUTES.CARDS, label: 'Cards', icon: '💳' },
+  { to: ROUTES.PROFILE, label: 'Profile', icon: '👤' },
 ];
 
 const BottomNav = () => (

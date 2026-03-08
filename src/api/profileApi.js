@@ -1,7 +1,7 @@
 // src/api/profileApi.js
-import client from './client';
+import client from "./client";
 
-const BASE = '/profile';
+const BASE = "/profile";
 
 export const profileApi = {
   // ── Parent ─────────────────────────────────────────
@@ -25,18 +25,19 @@ export const profileApi = {
    * Body: { name, dob, gender, blood_group, school_name, class,
    *         allergies, medical_conditions, emergency_contacts[] }
    */
-  upsertStudent: (studentId, data) => client.put(`${BASE}/students/${studentId}`, data),
+  upsertStudent: (studentId, data) =>
+    client.put(`${BASE}/students/${studentId}`, data),
 
   /** POST /profile/students → create new student; returns Student */
   createStudent: (data) => client.post(`${BASE}/students`, data),
 
   /**
    * POST /profile/students/:id/photo  (multipart/form-data)
-   * @returns {{ data: { photo_url: string } }}
+   * ../returns {{ data: { photo_url: string } }}
    */
   uploadStudentPhoto: (studentId, formData) =>
     client.post(`${BASE}/students/${studentId}/photo`, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { "Content-Type": "multipart/form-data" },
     }),
 
   /** DELETE /profile/students/:id */

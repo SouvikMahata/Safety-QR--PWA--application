@@ -1,13 +1,13 @@
 // src/components/card/CardTile.jsx
 import { motion } from 'framer-motion';
-import Badge from '@components/ui/Badge';
-import Toggle from '@components/ui/Toggle';
-import { formatCardNumber } from '@utils/formatters';
+import Badge from '../components/ui/Badge';
+import Toggle from '../components/ui/Toggle';
+import { formatCardNumber } from '../utils/formatters';
 
 const CardTile = ({ card, onToggleStatus, onToggleBlock, onPress, actionLoading }) => {
-  const isBlocked  = card.blocked;
-  const isActive   = card.status === 'active';
-  const isLoading  = actionLoading;
+  const isBlocked = card.blocked;
+  const isActive = card.status === 'active';
+  const isLoading = actionLoading;
 
   return (
     <motion.div

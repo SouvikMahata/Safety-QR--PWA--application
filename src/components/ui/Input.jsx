@@ -10,7 +10,7 @@ const Input = forwardRef(({
   className = '',
   inputClassName = '',
   required,
-  ...rest
+  ../.rest
 }, ref) => (
   <div className={`flex flex-col gap-1 ${className}`}>
     {label && (
@@ -31,7 +31,7 @@ const Input = forwardRef(({
           'flex-1 bg-transparent text-slate-100 text-sm outline-none placeholder-slate-600',
           inputClassName,
         ].join(' ')}
-        {...rest}
+        {../.rest}
       />
 
       {suffix && <span className="text-slate-400 shrink-0 text-sm">{suffix}</span>}

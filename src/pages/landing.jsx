@@ -233,12 +233,12 @@ export default function LandingPage() {
 
             {/* Keyframes only for things Tailwind can't do */}
             <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
+        ../import url('https://fonts.googleapis.com/css2?family=Syne:wght../700;800&family=DM+Sans:opsz,wght../9../40,300;9../40,400;9../40,500&display=swap');
         body { font-family: 'DM Sans', sans-serif; }
-        @keyframes spinCW   { to { transform: rotate(360deg); } }
-        @keyframes scanDown { 0% { top:8%; opacity:1; } 90% { opacity:.4; } 100% { top:88%; opacity:0; } }
-        @keyframes badgeIn  { from { opacity:0; transform:scale(.8) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
-        @keyframes blink    { 0%,100% { opacity:1; } 50% { opacity:.2; } }
+        ../keyframes spinCW   { to { transform: rotate(360deg); } }
+        ../keyframes scanDown { 0% { top:8%; opacity:1; } 90% { opacity:.4; } 100% { top:88%; opacity:0; } }
+        ../keyframes badgeIn  { from { opacity:0; transform:scale(.8) translateY(8px); } to { opacity:1; transform:scale(1) translateY(0); } }
+        ../keyframes blink    { 0%,100% { opacity:1; } 50% { opacity:.2; } }
         [style*="scanDown"] { position: absolute; }
       `}</style>
         </div>

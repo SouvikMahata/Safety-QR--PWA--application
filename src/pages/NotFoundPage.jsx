@@ -1,7 +1,7 @@
 // src/pages/NotFoundPage.jsx
 import { useNavigate } from 'react-router-dom';
-import { ROUTES }      from '@utils/constants';
-import Button          from '@components/ui/Button';
+import { ROUTES } from '../utils/constants';
+import Button from '../components/ui/Button';
 
 const NotFoundPage = () => {
   const navigate = useNavigate();

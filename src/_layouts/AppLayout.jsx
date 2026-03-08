@@ -2,20 +2,20 @@
 import { Outlet } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
-import BottomNav    from '@components/common/BottomNav';
-import OfflineBanner from '@components/common/OfflineBanner';
-import ConfirmDialog from '@components/ui/ConfirmDialog';
-import { useNetwork } from '@hooks/useNetwork';
+import BottomNav from '../components/common/BottomNav';
+import OfflineBanner from '../components/common/OfflineBanner';
+import ConfirmDialog from '../components/ui/ConfirmDialog';
+import { useNetwork } from '../hooks/useNetwork';
 
 const pageVariants = {
   initial: { opacity: 0, y: 8 },
-  enter:   { opacity: 1, y: 0,  transition: { duration: 0.2, ease: 'easeOut' } },
-  exit:    { opacity: 0, y: -8, transition: { duration: 0.15 } },
+  enter: { opacity: 1, y: 0, transition: { duration: 0.2, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -8, transition: { duration: 0.15 } },
 };
 
 const AppLayout = () => {
-  const isOnline   = useNetwork();
-  const location   = useLocation();
+  const isOnline = useNetwork();
+  const location = useLocation();
 
   return (
     <div className="flex flex-col min-h-dvh bg-slate-900">

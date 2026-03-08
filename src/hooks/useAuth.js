@@ -1,5 +1,5 @@
 // src/hooks/useAuth.js
-import useAuthStore from '@store/authStore';
+import useAuthStore from "../store/authStore";
 
 /**
  * Convenience hook — exposes auth state + actions.

@@ -1,6 +1,6 @@
 // src/components/forms/OtpInput.jsx
 import { useRef, useCallback } from 'react';
-import { ENV } from '@utils/env';
+import { ENV } from '../utils/env';
 
 /**
  * Renders N individual digit boxes for OTP entry.
@@ -12,7 +12,7 @@ const OtpInput = ({ value = '', onChange, error, length = ENV.OTP_LENGTH }) => {
 
   const handleChange = useCallback((idx, e) => {
     const ch = e.target.value.replace(/\D/g, '').slice(-1);
-    const next = [...digits];
+    const next = [../.digits];
     next[idx] = ch;
     onChange(next.join(''));
     if (ch && idx < length - 1) inputsRef.current[idx + 1]?.focus();

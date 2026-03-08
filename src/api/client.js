@@ -5,14 +5,14 @@
 // • Queues concurrent requests during refresh
 // • Normalises all error shapes to { status, message, errors, code }
 
-import axios from 'axios';
-import { tokenService } from '@services/tokenService';
-import { ENV } from '@utils/env';
+import axios from "axios";
+import { tokenService } from "../services/tokenService";
+import { ENV } from "../utils/env";
 
 const client = axios.create({
   baseURL: ENV.API_BASE_URL,
   timeout: ENV.API_TIMEOUT,
-  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+  headers: { "Content-Type": "application/json", Accept: "application/json" },
 });
 
 // ── Request: inject token ────────────────────────────
@@ -27,7 +27,7 @@ client.interceptors.request.use(
 
 // ── Response: refresh + error normalisation ──────────
 let isRefreshing = false;
-let failedQueue  = [];
+let failedQueue = [];
 
 const drainQueue = (err, token = null) => {
   failedQueue.forEach((p) => (err ? p.reject(err) : p.resolve(token)));
@@ -35,7 +35,7 @@ const drainQueue = (err, token = null) => {
 };
 
 client.interceptors.response.use(
-  (res) => res.data,   // auto-unwrap { data, ... } → data
+  (res) => res.data, // auto-unwrap { data, ../. } → data
   async (err) => {
     const orig = err.config;
 
@@ -49,17 +49,16 @@ client.interceptors.response.use(
         });
       }
 
-      orig._retry   = true;
-      isRefreshing  = true;
+      orig._retry = true;
+      isRefreshing = true;
 
       try {
         const rt = tokenService.getRefreshToken();
-        if (!rt) throw new Error('No refresh token');
+        if (!rt) throw new Error("No refresh token");
 
-        const { data } = await axios.post(
-          `${ENV.API_BASE_URL}/auth/refresh`,
-          { refresh_token: rt },
-        );
+        const { data } = await axios.post(`${ENV.API_BASE_URL}/auth/refresh`, {
+          refresh_token: rt,
+        });
         tokenService.setTokens(data.access_token, data.refresh_token);
         drainQueue(null, data.access_token);
         orig.headers.Authorization = `Bearer ${data.access_token}`;
@@ -67,7 +66,7 @@ client.interceptors.response.use(
       } catch (refreshErr) {
         drainQueue(refreshErr, null);
         tokenService.clearTokens();
-        window.location.replace('/auth/login');
+        window.location.replace("/auth/login");
         return Promise.reject(refreshErr);
       } finally {
         isRefreshing = false;
@@ -76,10 +75,11 @@ client.interceptors.response.use(
 
     // Normalise error
     return Promise.reject({
-      status:  err.response?.status,
-      message: err.response?.data?.message || err.message || 'Something went wrong',
-      errors:  err.response?.data?.errors  || {},
-      code:    err.response?.data?.code    || 'UNKNOWN_ERROR',
+      status: err.response?.status,
+      message:
+        err.response?.data?.message || err.message || "Something went wrong",
+      errors: err.response?.data?.errors || {},
+      code: err.response?.data?.code || "UNKNOWN_ERROR",
     });
   },
 );

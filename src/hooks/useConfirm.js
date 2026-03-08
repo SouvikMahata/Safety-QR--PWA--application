@@ -1,5 +1,5 @@
 // src/hooks/useConfirm.js
-import useUIStore from '@store/uiStore';
+import useUIStore from "../store/uiStore";
 
 /**
  * Opens the global confirm dialog.
@@ -13,8 +13,14 @@ export const useConfirm = () => {
       openConfirm({
         title,
         message,
-        onConfirm: () => { closeConfirm(); resolve(true); },
-        onCancel:  () => { closeConfirm(); resolve(false); },
+        onConfirm: () => {
+          closeConfirm();
+          resolve(true);
+        },
+        onCancel: () => {
+          closeConfirm();
+          resolve(false);
+        },
       });
     });
 

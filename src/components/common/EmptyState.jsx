@@ -1,5 +1,5 @@
 // src/components/common/EmptyState.jsx
-import Button from '@components/ui/Button';
+import Button from '../../components/ui/Button';
 
 const EmptyState = ({ icon = '📭', title, description, actionLabel, onAction }) => (
   <div className="flex flex-col items-center justify-center text-center py-16 px-6 gap-4">

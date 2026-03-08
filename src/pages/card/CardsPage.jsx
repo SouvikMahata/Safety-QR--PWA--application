@@ -2,21 +2,21 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '../hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { linkCardSchema }      from '@validations/schemas';
-import { useCards }            from '@hooks/useCards';
-import { useProfile }          from '@hooks/useProfile';
-import { ROUTES }              from '@utils/constants';
-import { notificationService } from '@services/notificationService';
+import { linkCardSchema } from '../validations/schemas';
+import { useCards } from '../hooks/useCards';
+import { useProfile } from '../hooks/useProfile';
+import { ROUTES } from '../utils/constants';
+import { notificationService } from '../services/notificationService';
 
-import PageHeader from '@components/common/PageHeader';
-import EmptyState from '@components/common/EmptyState';
-import CardTile   from '@components/card/CardTile';
-import Button     from '@components/ui/Button';
-import Input      from '@components/ui/Input';
-import Select     from '@components/ui/Select';
+import PageHeader from '../components/common/PageHeader';
+import EmptyState from '../components/common/EmptyState';
+import CardTile from '../components/card/CardTile';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Select from '../components/ui/Select';
 
 const CardsPage = () => {
   const navigate = useNavigate();
@@ -78,19 +78,19 @@ const CardsPage = () => {
                   label="Card Number" placeholder="SQRA-1234-5678"
                   autoCapitalize="characters"
                   error={errors.card_number?.message} required
-                  {...register('card_number')}
+                  {../.register('card_number')}
                 />
                 <Input
                   label="Nonce (Scratch Code)" type="password"
                   placeholder="Scratch &amp; enter code"
                   error={errors.nonce?.message} required
-                  {...register('nonce')}
+                  {../.register('nonce')}
                 />
                 <Select
                   label="Assign to Student" options={studentOptions}
                   placeholder="Select student"
                   error={errors.student_id?.message} required
-                  {...register('student_id')}
+                  {../.register('student_id')}
                 />
                 <Button type="submit" fullWidth loading={loading}>Link Card</Button>
               </form>

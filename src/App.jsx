@@ -1,3 +1,12 @@
-// src/App.jsx
-// RouterProvider is handled in main.jsx — this file kept for potential future wrapping
-export default null;
+import React from 'react'
+import { AllRoutes } from './routes/AllRoutes'
+
+function App() {
+    return (
+        <>
+            <AllRoutes />
+        </>
+    )
+}
+
+export default App

@@ -2,13 +2,13 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useProfile } from '@hooks/useProfile';
-import { ROUTES }     from '@utils/constants';
+import { useProfile } from '../hooks/useProfile';
+import { ROUTES } from '../utils/constants';
 
-import PageHeader  from '@components/common/PageHeader';
-import EmptyState  from '@components/common/EmptyState';
-import StudentTile from '@components/student/StudentTile';
-import Button      from '@components/ui/Button';
+import PageHeader from '../components/common/PageHeader';
+import EmptyState from '../components/common/EmptyState';
+import StudentTile from '../components/student/StudentTile';
+import Button from '../components/ui/Button';
 
 const StudentsPage = () => {
   const navigate = useNavigate();

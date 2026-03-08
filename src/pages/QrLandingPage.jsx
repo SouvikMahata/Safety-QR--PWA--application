@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import { publicApi }   from '@api/publicApi';
-import { formatDate, calcAge, formatPhone } from '@utils/formatters';
+import { publicApi } from '../api/publicApi';
+import { formatDate, calcAge, formatPhone } from '../utils/formatters';
 
 const Section = ({ title, children }) => (
   <div className="bg-white rounded-2xl p-4 shadow-sm mb-3">
@@ -26,10 +26,10 @@ const Row = ({ label, value, highlight }) => (
 );
 
 const QrLandingPage = () => {
-  const { cardId }                    = useParams();
-  const [profile, setProfile]         = useState(null);
-  const [loading, setLoading]         = useState(true);
-  const [error,   setError]           = useState(null);
+  const { cardId } = useParams();
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     publicApi.getEmergencyProfile(cardId)
@@ -72,10 +72,10 @@ const QrLandingPage = () => {
       <div className="p-4">
         {/* Critical info */}
         <Section title="Critical Medical Info">
-          <Row label="Blood Group"  value={profile.blood_group}          highlight />
-          <Row label="Age"          value={calcAge(profile.dob)} />
+          <Row label="Blood Group" value={profile.blood_group} highlight />
+          <Row label="Age" value={calcAge(profile.dob)} />
           <Row label="Date of Birth" value={formatDate(profile.dob)} />
-          <Row label="Allergies"    value={profile.allergies || 'None'}    highlight={!!profile.allergies} />
+          <Row label="Allergies" value={profile.allergies || 'None'} highlight={!!profile.allergies} />
           <Row label="Medical Conditions" value={profile.medical_conditions || 'None'} highlight={!!profile.medical_conditions} />
         </Section>
 

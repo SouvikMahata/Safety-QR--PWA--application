@@ -2,23 +2,23 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '../hookform/resolvers/zod';
 
-import { studentProfileSchema }  from '@validations/schemas';
-import { useProfile }            from '@hooks/useProfile';
-import { ROUTES, BLOOD_GROUPS, GENDER_OPTIONS, CLASS_OPTIONS } from '@utils/constants';
-import { notificationService }   from '@services/notificationService';
+import { studentProfileSchema } from '../validations/schemas';
+import { useProfile } from '../hooks/useProfile';
+import { ROUTES, BLOOD_GROUPS, GENDER_OPTIONS, CLASS_OPTIONS } from '../utils/constants';
+import { notificationService } from '../services/notificationService';
 
-import Input                   from '@components/ui/Input';
-import Select                  from '@components/ui/Select';
-import Button                  from '@components/ui/Button';
-import PageHeader              from '@components/common/PageHeader';
-import EmergencyContactFields  from '@components/forms/EmergencyContactFields';
+import Input from '../components/ui/Input';
+import Select from '../components/ui/Select';
+import Button from '../components/ui/Button';
+import PageHeader from '../components/common/PageHeader';
+import EmergencyContactFields from '../components/forms/EmergencyContactFields';
 
 const StudentEditPage = () => {
-  const navigate      = useNavigate();
+  const navigate = useNavigate();
   const { studentId } = useParams();
-  const isNew         = !studentId;
+  const isNew = !studentId;
 
   const { createStudent, upsertStudent, getStudentById, loading } = useProfile();
   const existing = isNew ? null : getStudentById(studentId);
@@ -46,7 +46,7 @@ const StudentEditPage = () => {
       navigate(isNew
         ? ROUTES.STUDENT_DETAIL.replace(':studentId', result.student.id)
         : ROUTES.STUDENT_DETAIL.replace(':studentId', studentId),
-      { replace: true });
+        { replace: true });
     } else {
       notificationService.error(result.error || 'Save failed');
     }
@@ -63,50 +63,50 @@ const StudentEditPage = () => {
         <Input
           label="Full Name" placeholder="e.g. Arjun Sharma"
           error={errors.name?.message} required
-          {...register('name')}
+          {../.register('name')}
         />
 
         <Input
           label="Date of Birth" type="date"
           error={errors.dob?.message} required
-          {...register('dob')}
+          {../.register('dob')}
         />
 
         <div className="grid grid-cols-2 gap-3">
           <Select
             label="Gender" options={GENDER_OPTIONS}
             placeholder="Select" error={errors.gender?.message} required
-            {...register('gender')}
+            {../.register('gender')}
           />
           <Select
             label="Blood Group" options={BLOOD_GROUPS}
             placeholder="Select" error={errors.blood_group?.message} required
-            {...register('blood_group')}
+            {../.register('blood_group')}
           />
         </div>
 
         <Input
           label="School Name" placeholder="e.g. DPS School"
           error={errors.school_name?.message} required
-          {...register('school_name')}
+          {../.register('school_name')}
         />
 
         <Select
           label="Class" options={CLASS_OPTIONS}
           placeholder="Select class" error={errors.class?.message} required
-          {...register('class')}
+          {../.register('class')}
         />
 
         <Input
           label="Allergies (optional)"
           placeholder="e.g. Peanuts, Penicillin"
-          {...register('allergies')}
+          {../.register('allergies')}
         />
 
         <Input
           label="Medical Conditions (optional)"
           placeholder="e.g. Asthma, Diabetes"
-          {...register('medical_conditions')}
+          {../.register('medical_conditions')}
         />
 
         <EmergencyContactFields control={control} register={register} errors={errors} />

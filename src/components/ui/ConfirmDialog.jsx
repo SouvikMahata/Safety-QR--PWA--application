@@ -1,6 +1,6 @@
 // src/components/ui/ConfirmDialog.jsx
 import { AnimatePresence, motion } from 'framer-motion';
-import useUIStore from '@store/uiStore';
+import useUIStore from '../../store/uiStore';
 import Button from './Button';
 
 const ConfirmDialog = () => {

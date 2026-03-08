@@ -1,26 +1,26 @@
 // src/store/authStore.js
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
-import { authApi } from '@api/authApi';
-import { tokenService } from '@services/tokenService';
-import { toE164 } from '@utils/formatters';
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { authApi } from "../api/authApi";
+import { tokenService } from "../services/tokenService";
+import { toE164 } from "../utils/formatters";
 
 const useAuthStore = create(
   persist(
     (set, get) => ({
       // ── State ────────────────────────────────────────
-      user:            null,
-      mobile:          null,   // holds mobile during OTP flow
+      user: null,
+      mobile: null, // holds mobile during OTP flow
       isAuthenticated: false,
-      isRegistered:    null,   // null = unknown | true | false
-      otpSent:         false,
-      loading:         false,
-      error:           null,
+      isRegistered: null, // null = unknown | true | false
+      otpSent: false,
+      loading: false,
+      error: null,
 
       // ── Helpers ──────────────────────────────────────
-      setMobile:   (mobile) => set({ mobile }),
-      clearError:  ()       => set({ error: null }),
-      resetOtp:    ()       => set({ otpSent: false, mobile: null }),
+      setMobile: (mobile) => set({ mobile }),
+      clearError: () => set({ error: null }),
+      resetOtp: () => set({ otpSent: false, mobile: null }),
 
       // ── Actions ──────────────────────────────────────
 
@@ -31,8 +31,8 @@ const useAuthStore = create(
         try {
           const res = await authApi.sendOtp(mobile);
           set({
-            loading:      false,
-            otpSent:      true,
+            loading: false,
+            otpSent: true,
             isRegistered: res.data?.is_registered ?? null,
           });
           return { success: true };
@@ -50,10 +50,10 @@ const useAuthStore = create(
           const res = await authApi.verifyOtp({ mobile, otp });
           tokenService.setTokens(res.data.access_token, res.data.refresh_token);
           set({
-            loading:         false,
+            loading: false,
             isAuthenticated: true,
-            user:            res.data.user,
-            otpSent:         false,
+            user: res.data.user,
+            otpSent: false,
           });
           return { success: true, isNewUser: res.data.is_new_user };
         } catch (err) {
@@ -79,20 +79,29 @@ const useAuthStore = create(
 
       /** Logout */
       logout: async () => {
-        try { await authApi.logout(); } catch { /* server-side best-effort */ }
+        try {
+          await authApi.logout();
+        } catch {
+          /* server-side best-effort */
+        }
         tokenService.clearTokens();
-        set({ user: null, isAuthenticated: false, mobile: null, otpSent: false });
+        set({
+          user: null,
+          isAuthenticated: false,
+          mobile: null,
+          otpSent: false,
+        });
       },
     }),
     {
-      name:    'sqr-auth',
+      name: "sqr-auth",
       storage: createJSONStorage(() => sessionStorage),
       // Only persist minimal auth state — tokens stay in memory/sessionStorage separately
       partialize: (s) => ({
-        user:            s.user,
+        user: s.user,
         isAuthenticated: s.isAuthenticated,
-        mobile:          s.mobile,
-        isRegistered:    s.isRegistered,
+        mobile: s.mobile,
+        isRegistered: s.isRegistered,
       }),
     },
   ),

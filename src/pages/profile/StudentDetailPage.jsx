@@ -2,16 +2,16 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useProfile } from '@hooks/useProfile';
-import { useConfirm } from '@hooks/useConfirm';
-import { ROUTES }     from '@utils/constants';
-import { formatDate, calcAge, getInitials } from '@utils/formatters';
-import { notificationService } from '@services/notificationService';
+import { useProfile } from '../hooks/useProfile';
+import { useConfirm } from '../hooks/useConfirm';
+import { ROUTES } from '../utils/constants';
+import { formatDate, calcAge, getInitials } from '../utils/formatters';
+import { notificationService } from '../services/notificationService';
 
-import PageHeader from '@components/common/PageHeader';
-import Card       from '@components/ui/Card';
-import Badge      from '@components/ui/Badge';
-import Button     from '@components/ui/Button';
+import PageHeader from '../components/common/PageHeader';
+import Card from '../components/ui/Card';
+import Badge from '../components/ui/Badge';
+import Button from '../components/ui/Button';
 
 const Section = ({ title, children }) => (
   <div className="mb-4">
@@ -28,9 +28,9 @@ const InfoRow = ({ label, value }) => (
 );
 
 const StudentDetailPage = () => {
-  const navigate      = useNavigate();
+  const navigate = useNavigate();
   const { studentId } = useParams();
-  const confirm       = useConfirm();
+  const confirm = useConfirm();
 
   const { getStudentById, fetchStudents, deleteStudent, studentsLoading } = useProfile();
   const student = getStudentById(studentId);
@@ -39,7 +39,7 @@ const StudentDetailPage = () => {
 
   const handleDelete = async () => {
     const ok = await confirm({
-      title:   'Delete Student?',
+      title: 'Delete Student?',
       message: `This will permanently remove ${student?.name}'s profile and all linked cards.`,
     });
     if (!ok) return;
@@ -91,7 +91,7 @@ const StudentDetailPage = () => {
             <p className="text-sm text-slate-400">{student.class} · {student.school_name}</p>
             <div className="flex gap-2 mt-1">
               <Badge label={student.blood_group} variant="info" />
-              <Badge label={student.gender}      variant="inactive" />
+              <Badge label={student.gender} variant="inactive" />
             </div>
           </div>
         </div>
@@ -100,8 +100,8 @@ const StudentDetailPage = () => {
         <Card>
           <Section title="Basic Info">
             <InfoRow label="Date of Birth" value={`${formatDate(student.dob)} (${calcAge(student.dob)})`} />
-            <InfoRow label="Blood Group"   value={student.blood_group} />
-            <InfoRow label="Allergies"     value={student.allergies || 'None'} />
+            <InfoRow label="Blood Group" value={student.blood_group} />
+            <InfoRow label="Allergies" value={student.allergies || 'None'} />
             <InfoRow label="Medical Notes" value={student.medical_conditions || 'None'} />
           </Section>
         </Card>

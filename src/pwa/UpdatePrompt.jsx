@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Button from '@components/ui/Button';
+import Button from '../components/ui/Button';
 
 const UpdatePrompt = () => {
   const { needRefresh: [needRefresh], updateServiceWorker } = useRegisterSW();

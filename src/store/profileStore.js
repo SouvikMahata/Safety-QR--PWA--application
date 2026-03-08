@@ -1,14 +1,14 @@
 // src/store/profileStore.js
-import { create } from 'zustand';
-import { profileApi } from '@api/profileApi';
+import { create } from "zustand";
+import { profileApi } from "../api/profileApi";
 
 const useProfileStore = create((set, get) => ({
   // ── State ──────────────────────────────────────────
-  parent:         null,
-  students:       [],
-  loading:        false,
-  studentsLoading:false,
-  error:          null,
+  parent: null,
+  students: [],
+  loading: false,
+  studentsLoading: false,
+  error: null,
 
   clearError: () => set({ error: null }),
 
@@ -50,7 +50,7 @@ const useProfileStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       const res = await profileApi.createStudent(data);
-      set((s) => ({ loading: false, students: [...s.students, res.data] }));
+      set((s) => ({ loading: false, students: [../.s.students, res.data] }));
       return { success: true, student: res.data };
     } catch (err) {
       set({ loading: false, error: err.message });
@@ -64,7 +64,7 @@ const useProfileStore = create((set, get) => ({
       const res = await profileApi.upsertStudent(studentId, data);
       set((s) => ({
         loading: false,
-        students: s.students.map((st) => st.id === studentId ? res.data : st),
+        students: s.students.map((st) => (st.id === studentId ? res.data : st)),
       }));
       return { success: true, student: res.data };
     } catch (err) {
@@ -78,7 +78,7 @@ const useProfileStore = create((set, get) => ({
       const res = await profileApi.uploadStudentPhoto(studentId, formData);
       set((s) => ({
         students: s.students.map((st) =>
-          st.id === studentId ? { ...st, photo_url: res.data.photo_url } : st,
+          st.id === studentId ? { ../.st, photo_url: res.data.photo_url } : st,
         ),
       }));
       return { success: true, photo_url: res.data.photo_url };
@@ -91,7 +91,10 @@ const useProfileStore = create((set, get) => ({
     set({ loading: true, error: null });
     try {
       await profileApi.deleteStudent(studentId);
-      set((s) => ({ loading: false, students: s.students.filter((st) => st.id !== studentId) }));
+      set((s) => ({
+        loading: false,
+        students: s.students.filter((st) => st.id !== studentId),
+      }));
       return { success: true };
     } catch (err) {
       set({ loading: false, error: err.message });

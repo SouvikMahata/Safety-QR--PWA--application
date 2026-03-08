@@ -1,10 +1,10 @@
 // src/components/card/QrCodeDisplay.jsx
 import { QRCodeSVG } from 'qrcode.react';
-import { ENV } from '@utils/env';
+// import { ENV } from '../../utils/';
 
 /**
  * Renders QR code for a card.
- * @param {{ cardId: string, size?: number, blocked?: boolean, inactive?: boolean }} props
+ * ../param {{ cardId: string, size?: number, blocked?: boolean, inactive?: boolean }} props
  */
 const QrCodeDisplay = ({ cardId, size = 200, blocked = false, inactive = false }) => {
   const url = `${ENV.QR_BASE_URL}/e/${cardId}`;

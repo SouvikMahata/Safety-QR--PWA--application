@@ -1,7 +1,7 @@
 // src/components/student/StudentTile.jsx
 import { motion } from 'framer-motion';
-import { getInitials, calcAge } from '@utils/formatters';
-import Badge from '@components/ui/Badge';
+import { getInitials, calcAge } from '../utils/formatters';
+import Badge from '../components/ui/Badge';
 
 const StudentTile = ({ student, onPress }) => (
   <motion.div

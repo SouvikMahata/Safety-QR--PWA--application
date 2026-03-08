@@ -1,13 +1,13 @@
 // src/components/forms/EmergencyContactFields.jsx
 import { useFieldArray } from 'react-hook-form';
-import Input from '@components/ui/Input';
-import Select from '@components/ui/Select';
-import Button from '@components/ui/Button';
-import { RELATION_OPTIONS } from '@utils/constants';
+import Input from '../components/ui/Input';
+import Select from '../components/ui/Select';
+import Button from '../components/ui/Button';
+import { RELATION_OPTIONS } from '../utils/constants';
 
 /**
  * Dynamic emergency contacts array — used inside react-hook-form context.
- * @param {{ control, register, errors }} props
+ * ../param {{ control, register, errors }} props
  */
 const EmergencyContactFields = ({ control, register, errors }) => {
   const { fields, append, remove } = useFieldArray({ control, name: 'emergency_contacts' });
@@ -53,7 +53,7 @@ const EmergencyContactFields = ({ control, register, errors }) => {
             label="Full Name"
             placeholder="e.g. Ramesh Kumar"
             error={errors?.emergency_contacts?.[i]?.name?.message}
-            {...register(`emergency_contacts.${i}.name`)}
+            {../.register(`emergency_contacts.${i}.name`)}
             required
           />
 
@@ -62,7 +62,7 @@ const EmergencyContactFields = ({ control, register, errors }) => {
             options={RELATION_OPTIONS}
             placeholder="Select relation"
             error={errors?.emergency_contacts?.[i]?.relation?.message}
-            {...register(`emergency_contacts.${i}.relation`)}
+            {../.register(`emergency_contacts.${i}.relation`)}
             required
           />
 
@@ -72,7 +72,7 @@ const EmergencyContactFields = ({ control, register, errors }) => {
             placeholder="+91 98765 43210"
             inputMode="tel"
             error={errors?.emergency_contacts?.[i]?.mobile?.message}
-            {...register(`emergency_contacts.${i}.mobile`)}
+            {../.register(`emergency_contacts.${i}.mobile`)}
             required
           />
         </div>

@@ -2,17 +2,17 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '../hookform/resolvers/zod';
 import { motion } from 'framer-motion';
 
-import { mobileSchema } from '@validations/schemas';
-import { useAuth } from '@hooks/useAuth';
-import { ROUTES, STORAGE_KEYS } from '@utils/constants';
-import { storageService } from '@services/storageService';
-import { notificationService } from '@services/notificationService';
+import { mobileSchema } from '../../validations/schema';
+import { useAuth } from '../../hooks/useAuth';
+import { ROUTES, STORAGE_KEYS } from '../../utils/constants';
+import { storageService } from '../../services/storageService';
+import { notificationService } from '../../services/notificationService';
 
-import Input from '@components/ui/Input';
-import Button from '@components/ui/Button';
+import Input from '../../components/ui/Input';
+import Button from '../components/ui/Button';
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ const LoginPage = () => {
                     error={errors.mobile?.message}
                     autoFocus
                     required
-                    {...register('mobile')}
+                    {../.register('mobile')}
                 />
 
                 <Button type="submit" loading={loading} fullWidth size="lg">

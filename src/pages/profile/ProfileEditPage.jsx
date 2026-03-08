@@ -2,16 +2,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '../hookform/resolvers/zod';
 
-import { parentProfileSchema }  from '@validations/schemas';
-import { useProfile }           from '@hooks/useProfile';
-import { ROUTES }               from '@utils/constants';
-import { notificationService }  from '@services/notificationService';
+import { parentProfileSchema } from '../validations/schemas';
+import { useProfile } from '../hooks/useProfile';
+import { ROUTES } from '../utils/constants';
+import { notificationService } from '../services/notificationService';
 
-import PageHeader from '@components/common/PageHeader';
-import Input      from '@components/ui/Input';
-import Button     from '@components/ui/Button';
+import PageHeader from '../components/common/PageHeader';
+import Input from '../components/ui/Input';
+import Button from '../components/ui/Button';
 
 const ProfileEditPage = () => {
   const navigate = useNavigate();
@@ -50,16 +50,16 @@ const ProfileEditPage = () => {
         <Input
           label="Full Name" placeholder="Your full name"
           error={errors.name?.message} required
-          {...register('name')}
+          {../.register('name')}
         />
         <Input
-          label="Email (optional)" type="email" placeholder="you@example.com"
+          label="Email (optional)" type="email" placeholder="you../example.com"
           error={errors.email?.message}
-          {...register('email')}
+          {../.register('email')}
         />
         <Input
           label="Address (optional)" placeholder="Your home address"
-          {...register('address')}
+          {../.register('address')}
         />
         <Button type="submit" loading={loading} fullWidth size="lg">
           Save Changes

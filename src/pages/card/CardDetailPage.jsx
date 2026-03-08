@@ -2,18 +2,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCards }   from '@hooks/useCards';
-import { useConfirm } from '@hooks/useConfirm';
-import { ROUTES }     from '@utils/constants';
-import { formatCardNumber, formatDateTime } from '@utils/formatters';
-import { notificationService } from '@services/notificationService';
+import { useCards } from '../hooks/useCards';
+import { useConfirm } from '../hooks/useConfirm';
+import { ROUTES } from '../utils/constants';
+import { formatCardNumber, formatDateTime } from '../utils/formatters';
+import { notificationService } from '../services/notificationService';
 
-import PageHeader     from '@components/common/PageHeader';
-import Card           from '@components/ui/Card';
-import Badge          from '@components/ui/Badge';
-import Button         from '@components/ui/Button';
-import Toggle         from '@components/ui/Toggle';
-import QrCodeDisplay  from '@components/card/QrCodeDisplay';
+import PageHeader from '../components/common/PageHeader';
+import Card from '../components/ui/Card';
+import Badge from '../components/ui/Badge';
+import Button from '../components/ui/Button';
+import Toggle from '../components/ui/Toggle';
+import QrCodeDisplay from '../components/card/QrCodeDisplay';
 
 const Row = ({ label, value }) => (
   <div className="flex justify-between py-2 border-b border-slate-800 last:border-0 items-center">
@@ -23,22 +23,22 @@ const Row = ({ label, value }) => (
 );
 
 const CardDetailPage = () => {
-  const navigate    = useNavigate();
-  const { cardId }  = useParams();
-  const confirm     = useConfirm();
+  const navigate = useNavigate();
+  const { cardId } = useParams();
+  const confirm = useConfirm();
 
   const { getCardById, fetchCards, setCardStatus, setCardBlocked, unlinkCard, actionLoading, loading } = useCards();
   const card = getCardById(cardId);
 
   useEffect(() => { if (!card) fetchCards(); }, []);
 
-  const isLoading  = actionLoading[cardId];
-  const isBlocked  = card?.blocked;
-  const isActive   = card?.status === 'active';
+  const isLoading = actionLoading[cardId];
+  const isBlocked = card?.blocked;
+  const isActive = card?.status === 'active';
 
   const handleUnlink = async () => {
     const ok = await confirm({
-      title:   'Unlink Card?',
+      title: 'Unlink Card?',
       message: 'The QR code will stop working immediately. This cannot be undone.',
     });
     if (!ok) return;
@@ -74,8 +74,8 @@ const CardDetailPage = () => {
         {/* Card info */}
         <Card>
           <Row label="Card Number" value={<span className="font-mono">{formatCardNumber(card.card_number)}</span>} />
-          <Row label="Student"     value={card.student_name || '—'} />
-          <Row label="Linked on"   value={formatDateTime(card.created_at)} />
+          <Row label="Student" value={card.student_name || '—'} />
+          <Row label="Linked on" value={formatDateTime(card.created_at)} />
           <Row
             label="Status"
             value={

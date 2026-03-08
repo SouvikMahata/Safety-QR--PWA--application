@@ -2,16 +2,16 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuth }    from '@hooks/useAuth';
-import { useProfile } from '@hooks/useProfile';
-import { useConfirm } from '@hooks/useConfirm';
-import { ROUTES }     from '@utils/constants';
-import { formatPhone, getInitials } from '@utils/formatters';
-import { notificationService } from '@services/notificationService';
+import { useAuth } from '../hooks/useAuth';
+import { useProfile } from '../hooks/useProfile';
+import { useConfirm } from '../hooks/useConfirm';
+import { ROUTES } from '../utils/constants';
+import { formatPhone, getInitials } from '../utils/formatters';
+import { notificationService } from '../services/notificationService';
 
-import PageHeader from '@components/common/PageHeader';
-import Card       from '@components/ui/Card';
-import Button     from '@components/ui/Button';
+import PageHeader from '../components/common/PageHeader';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
 
 const MenuItem = ({ icon, label, onClick, danger }) => (
   <button
@@ -30,9 +30,9 @@ const MenuItem = ({ icon, label, onClick, danger }) => (
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const { user, logout }            = useAuth();
-  const { parent, fetchProfile }    = useProfile();
-  const confirm                     = useConfirm();
+  const { user, logout } = useAuth();
+  const { parent, fetchProfile } = useProfile();
+  const confirm = useConfirm();
 
   useEffect(() => { fetchProfile(); }, []);
 
@@ -64,9 +64,9 @@ const ProfilePage = () => {
         {/* Account */}
         <Card padding={false} className="px-3">
           <p className="text-xs text-slate-500 font-bold uppercase tracking-wide px-1 pt-3 pb-1">Account</p>
-          <MenuItem icon="✏️" label="Edit Profile"  onClick={() => navigate(ROUTES.PROFILE_EDIT)} />
-          <MenuItem icon="🎒" label="My Students"   onClick={() => navigate(ROUTES.STUDENTS)} />
-          <MenuItem icon="💳" label="My Cards"      onClick={() => navigate(ROUTES.CARDS)} />
+          <MenuItem icon="✏️" label="Edit Profile" onClick={() => navigate(ROUTES.PROFILE_EDIT)} />
+          <MenuItem icon="🎒" label="My Students" onClick={() => navigate(ROUTES.STUDENTS)} />
+          <MenuItem icon="💳" label="My Cards" onClick={() => navigate(ROUTES.CARDS)} />
         </Card>
 
         {/* Session */}

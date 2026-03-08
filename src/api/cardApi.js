@@ -1,7 +1,7 @@
 // src/api/cardApi.js
-import client from './client';
+import client from "./client";
 
-const BASE = '/cards';
+const BASE = "/cards";
 
 export const cardApi = {
   /** GET /cards → Card[] */
@@ -12,21 +12,21 @@ export const cardApi = {
 
   /**
    * POST /cards/link — link physical card to a student
-   * @param {{ card_number, nonce, student_id }} payload
+   * ../param {{ card_number, nonce, student_id }} payload
    */
   linkCard: ({ card_number, nonce, student_id }) =>
     client.post(`${BASE}/link`, { card_number, nonce, student_id }),
 
   /**
    * PATCH /cards/:id/status
-   * @param {'active'|'inactive'} status
+   * ../param {'active'|'inactive'} status
    */
   setCardStatus: (cardId, status) =>
     client.patch(`${BASE}/${cardId}/status`, { status }),
 
   /**
    * PATCH /cards/:id/block
-   * @param {boolean} blocked
+   * ../param {boolean} blocked
    */
   setCardBlocked: (cardId, blocked) =>
     client.patch(`${BASE}/${cardId}/block`, { blocked }),
